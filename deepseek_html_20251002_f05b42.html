@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard - Master Your Inbox, Protect Your Digital Life</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --danger: #dc2626;
+            --success: #16a34a;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-dark {
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #047857;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Game Section */
+        .game-container {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            display: none; /* Hidden until game starts */
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .score-display {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .timer {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--danger);
+        }
+
+        .email-display {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 300px;
+        }
+
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .email-subject {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .email-sender {
+            color: var(--gray);
+        }
+
+        .email-body {
+            line-height: 1.6;
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .game-controls button {
+            flex: 1;
+            max-width: 200px;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-phishing {
+            background-color: var(--danger);
+        }
+
+        .btn-phishing:hover {
+            background-color: #b91c1c;
+        }
+
+        .btn-legitimate {
+            background-color: var(--success);
+        }
+
+        .btn-legitimate:hover {
+            background-color: #15803d;
+        }
+
+        /* Start Screen */
+        .start-screen {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .start-screen h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .start-screen p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .game-instructions {
+            text-align: left;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 2rem 0;
+        }
+
+        .game-instructions h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .game-instructions ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .game-instructions li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .game-instructions li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Specifications Section */
+        .specs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .spec-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+        }
+
+        .spec-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Importance Section */
+        .importance-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        /* Download Section */
+        .download-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .download-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            width: 200px;
+        }
+
+        .download-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .ios {
+            color: #007aff;
+        }
+
+        .android {
+            color: #3ddc84;
+        }
+
+        .pwa-info {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--light);
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+        }
+
+        /* Popups */
+        .feedback-popup, .start-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .start-popup {
+            display: block; /* Show start popup by default */
+        }
+
+        .feedback-popup h3, .start-popup h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feedback-correct {
+            color: var(--success);
+        }
+
+        .feedback-incorrect {
+            color: var(--danger);
+        }
+
+        .feedback-popup p, .start-popup p {
+            margin-bottom: 1.5rem;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .start-overlay {
+            display: block; /* Show start overlay by default */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-btns .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .game-controls {
+                flex-direction: column;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .start-screen, .game-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>PhishGuard</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home">Home</a>
+                    <a href="#game">The Game</a>
+                    <a href="#features">Features</a>
+                    <a href="#specs">Specifications</a>
+                    <a href="#importance">Importance</a>
+                    <a href="#download">Download</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Master Your Inbox, Protect Your Digital Life</h1>
+            <p>PhishGuard is an interactive game that trains you to spot phishing attempts through realistic simulations. Build your cyber-defense skills in a safe, engaging environment.</p>
+            <div class="hero-btns">
+                <a href="#game" class="btn">Play Now</a>
+                <a href="#download" class="btn btn-secondary">Get the App</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Game Section -->
+    <section id="game">
+        <div class="container">
+            <h2>Spot the Phish</h2>
+            
+            <!-- Start Screen -->
+            <div class="start-screen" id="startScreen">
+                <h2>Ready to Test Your Phishing Detection Skills?</h2>
+                <p>You'll be presented with realistic email scenarios. Your job is to determine whether each email is legitimate or a phishing attempt.</p>
+                
+                <div class="game-instructions">
+                    <h3>How to Play:</h3>
+                    <ul>
+                        <li>You'll have <strong>15 seconds</strong> to analyze each email</li>
+                        <li>Click <strong>"Legitimate"</strong> if you think the email is safe</li>
+                        <li>Click <strong>"Phishing"</strong> if you suspect it's a scam</li>
+                        <li>Earn <strong>10 points</strong> for each correct answer</li>
+                        <li>Look for suspicious senders, urgent language, and strange links</li>
+                    </ul>
+                </div>
+                
+                <button class="btn btn-secondary" id="startGameBtn">Start Game</button>
+            </div>
+            
+            <!-- Game Container (Hidden until game starts) -->
+            <div class="game-container" id="gameContainer">
+                <div class="game-header">
+                    <div class="score-display">Score: <span id="score">0</span></div>
+                    <div class="timer">Time: <span id="timer">15</span>s</div>
+                </div>
+                <div class="email-display">
+                    <div class="email-header">
+                        <div class="email-sender">From: <span id="sender">security@yourbank.com</span></div>
+                        <div class="email-date" id="date">Oct 3, 2025</div>
+                    </div>
+                    <div class="email-subject" id="subject">Urgent: Your Account Needs Verification</div>
+                    <div class="email-body" id="emailBody">
+                        <p>Dear Valued Customer,</p>
+                        <p>We've detected unusual login activity on your account. To prevent suspension, please verify your identity immediately by clicking the link below:</p>
+                        <p><a href="#" id="emailLink">https://secure-yourbank-verify.com</a></p>
+                        <p>If you don't take action within 24 hours, your account access will be restricted.</p>
+                        <p>Sincerely,<br>Security Team</p>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <button class="btn btn-legitimate" id="legitimateBtn">Legitimate</button>
+                    <button class="btn btn-phishing" id="phishingBtn">Phishing</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <h2>How PhishGuard Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3>Realistic Email Simulations</h3>
+                    <p>Experience authentic-looking phishing emails based on real-world examples, covering various tactics from credential harvesting to malicious attachments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Timed Challenges</h3>
+                    <p>Test your instincts under pressure with our 15-second timer, simulating real-world decision-making conditions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Immediate Feedback</h3>
+                    <p>Learn from your decisions with detailed explanations about why an email is legitimate or a phishing attempt.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Gamified Learning</h3>
+                    <p>Earn points, unlock achievements, and climb leaderboards while building essential cybersecurity skills.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications Section -->
+    <section class="section-dark" id="specs">
+        <div class="container">
+            <h2>Technical Specifications</h2>
+            <div class="specs-container">
+                <div class="spec-card">
+                    <h3>Technology Stack</h3>
+                    <p>Built with modern web technologies: HTML5, CSS3, and vanilla JavaScript for optimal performance across all devices.</p>
+                </div>
+                <div class="spec-card">
+                    <h3>Cross-Platform</h3>
+                    <p>Runs seamlessly on desktop browsers, tablets, and mobile devices with responsive design principles.</p>
+                </div>
+                <div class="spec-card">
+                    <h3>Progressive Web App</h3>
+                    <p>Installable on your device with offline functionality and app-like experience.</p>
+                </div>
+                <div class="spec-card">
+                    <h3>No Data Collection</h3>
+                    <p>Your privacy matters - all game data stays locally on your device with no tracking or personal data collection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Importance Section -->
+    <section id="importance">
+        <div class="container">
+            <h2>Why Phishing Awareness Matters</h2>
+            <div class="importance-content">
+                <p>Phishing attacks are among the most common and damaging cyber threats facing individuals and organizations today. Attackers continuously evolve their tactics, using social engineering to exploit human psychology.</p>
+
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-value">71%</span>
+                        <span class="stat-label">of organizations faced BEC attacks in 2022</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">90%</span>
+                        <span class="stat-label">of data breaches start with phishing</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">60%</span>
+                        <span class="stat-label">increase in targeted phishing attempts</span>
+                    </div>
+                </div>
+
+                <h3>Types of Phishing Attacks</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>Email Phishing</h4>
+                        <p>Mass-sent fraudulent emails pretending to be from legitimate sources.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Spear Phishing</h4>
+                        <p>Highly targeted attacks using personalized information about the victim.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Smishing & Vishing</h4>
+                        <p>Phishing via SMS (smishing) or voice calls (vishing).</p>
+                    </div>
+                </div>
+
+                <p>Effective training combines education with practical simulations, helping users develop the skills to identify and avoid real threats. PhishGuard addresses this need by providing engaging, hands-on experience in a risk-free environment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download">
+        <div class="container">
+            <h2>Get PhishGuard</h2>
+            <p class="text-center">Install PhishGuard on your device for the best experience with offline access and push notifications for new challenges.</p>
+
+            <div class="download-options">
+                <div class="download-card">
+                    <div class="download-icon ios">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                    <h3>iOS</h3>
+                    <p>Available on the App Store</p>
+                    <a href="#" class="btn btn-outline" style="margin-top: 1rem;">Download</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon android">
+                        <i class="fab fa-google-play"></i>
+                    </div>
+                    <h3>Android</h3>
+                    <p>Get it on Google Play</p>
+                    <a href="#" class="btn btn-outline" style="margin-top: 1rem;">Download</a>
+                </div>
+            </div>
+
+            <div class="pwa-info">
+                <h3>Progressive Web App</h3>
+                <p>PhishGuard works as a Progressive Web App (PWA), meaning you can install it directly from your browser for an app-like experience without visiting an app store. Look for the "Add to Home Screen" prompt in your browser.</p>
+                <button class="btn" id="installPwa" style="margin-top: 1rem;">Install PWA Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="#" class="footer-logo">PhishGuard</a>
+                    <p>Building a human firewall through engaging cybersecurity education.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#game">The Game</a>
+                        <a href="#features">Features</a>
+                        <a href="#importance">Importance</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Resources</h4>
+                    <div class="footer-links">
+                        <a href="#">Phishing Examples</a>
+                        <a href="#">Security Tips</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Help Center</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Connect</h4>
+                    <div class="footer-links">
+                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Made with ❤️ for a safer digital world | PhishGuard is an open-source project</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Game Feedback Popup -->
+    <div class="overlay" id="overlay"></div>
+    <div class="feedback-popup" id="feedbackPopup">
+        <h3 id="feedbackTitle">Correct!</h3>
+        <p id="feedbackMessage">This was indeed a phishing attempt. The sense of urgency and suspicious link are common red flags.</p>
+        <button class="btn" id="nextEmailBtn">Next Challenge</button>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Game State
+        let gameState = {
+            score: 0,
+            timer: 15,
+            timerInterval: null,
+            currentEmail: 0,
+            gameActive: false,
+            emails: [
+                {
+                    sender: "security@yourbank.com",
+                    subject: "Urgent: Your Account Needs Verification",
+                    body: `<p>Dear Valued Customer,</p>
+                          <p>We've detected unusual login activity on your account. To prevent suspension, please verify your identity immediately by clicking the link below:</p>
+                          <p><a href="#">https://secure-yourbank-verify.com</a></p>
+                          <p>If you don't take action within 24 hours, your account access will be restricted.</p>
+                          <p>Sincerely,<br>Security Team</p>`,
+                    isPhishing: true,
+                    explanation: "This is a phishing attempt. Legitimate banks rarely use urgent language and don't ask for verification via email links. The domain 'secure-yourbank-verify.com' is suspicious."
+                },
+                {
+                    sender: "HR Department <hr@yourcompany.com>",
+                    subject: "Updated Employee Handbook",
+                    body: `<p>Hello Team,</p>
+                          <p>Please find attached the updated employee handbook for Q4 2025. This version includes updates to our remote work policy and benefits information.</p>
+                          <p>You can also access the handbook through our intranet portal.</p>
+                          <p>Best regards,<br>HR Department</p>`,
+                    isPhishing: false,
+                    explanation: "This is a legitimate email. It comes from a verified internal address and provides alternative access to the document without requiring immediate action."
+                },
+                {
+                    sender: "Netflix <billing@netflix-account.com>",
+                    subject: "Payment Issue with Your Account",
+                    body: `<p>Hi there,</p>
+                          <p>We're having trouble with your last payment. Please update your payment method to avoid interruption of your service.</p>
+                          <p><a href="#">Update your payment information now</a></p>
+                          <p>If you have any questions, please contact our support team.</p>
+                          <p>The Netflix Team</p>`,
+                    isPhishing: true,
+                    explanation: "This is a phishing attempt. The sender address uses 'netflix-account.com' instead of the legitimate '@netflix.com' domain. Legitimate Netflix emails would direct you to their official website."
+                },
+                {
+                    sender: "Amazon <order-update@amazon.com>",
+                    subject: "Your Order #113-6789210-4561234 Has Shipped",
+                    body: `<p>Hello Customer,</p>
+                          <p>Your recent Amazon order has shipped and is on its way. You can track your package using the link below:</p>
+                          <p><a href="#">Track your package</a></p>
+                          <p>Expected delivery: Thursday, October 5</p>
+                          <p>Thank you for shopping with Amazon!</p>`,
+                    isPhishing: false,
+                    explanation: "This is a legitimate email. It comes from the official amazon.com domain and provides specific order information without urgency or requests for personal information."
+                },
+                {
+                    sender: "Google <security-alert@google.com>",
+                    subject: "Suspicious sign-in prevented",
+                    body: `<p>Hi User,</p>
+                          <p>We noticed a suspicious sign-in attempt to your Google Account from a new device. For your security, we've prevented this sign-in.</p>
+                          <p>If this was you, you can verify this activity was legitimate:</p>
+                          <p><a href="#">Review activity</a></p>
+                          <p>If this wasn't you, we recommend you secure your account immediately.</p>
+                          <p>The Google Security Team</p>`,
+                    isPhishing: false,
+                    explanation: "This is a legitimate security notification. It comes from the official google.com domain and provides appropriate security information without creating unnecessary panic."
+                }
+            ]
+        };
+
+        // DOM Elements
+        const startScreen = document.getElementById('startScreen');
+        const gameContainer = document.getElementById('gameContainer');
+        const startGameBtn = document.getElementById('startGameBtn');
+        const scoreElement = document.getElementById('score');
+        const timerElement = document.getElementById('timer');
+        const senderElement = document.getElementById('sender');
+        const subjectElement = document.getElementById('subject');
+        const emailBodyElement = document.getElementById('emailBody');
+        const legitimateBtn = document.getElementById('legitimateBtn');
+        const phishingBtn = document.getElementById('phishingBtn');
+        const feedbackPopup = document.getElementById('feedbackPopup');
+        const overlay = document.getElementById('overlay');
+        const feedbackTitle = document.getElementById('feedbackTitle');
+        const feedbackMessage = document.getElementById('feedbackMessage');
+        const nextEmailBtn = document.getElementById('nextEmailBtn');
+        const installPwaBtn = document.getElementById('installPwa');
+
+        // Start Game Function
+        function startGame() {
+            gameState.gameActive = true;
+            startScreen.style.display = 'none';
+            gameContainer.style.display = 'block';
+            resetGame();
+            loadEmail(0);
+        }
+
+        // Initialize Game
+        function initGame() {
+            updateScore();
+            // Game doesn't start until user clicks Start button
+        }
+
+        // Update Score Display
+        function updateScore() {
+            scoreElement.textContent = gameState.score;
+        }
+
+        // Load Email
+        function loadEmail(index) {
+            if (index >= gameState.emails.length) {
+                // Game completed
+                showGameComplete();
+                return;
+            }
+
+            gameState.currentEmail = index;
+            const email = gameState.emails[index];
+            
+            senderElement.textContent = email.sender;
+            subjectElement.textContent = email.subject;
+            emailBodyElement.innerHTML = email.body;
+            
+            resetTimer();
+            startTimer();
+        }
+
+        // Timer Functions
+        function startTimer() {
+            if (!gameState.gameActive) return;
+            
+            clearInterval(gameState.timerInterval);
+            gameState.timer = 15;
+            timerElement.textContent = gameState.timer;
+            
+            gameState.timerInterval = setInterval(() => {
+                gameState.timer--;
+                timerElement.textContent = gameState.timer;
+                
+                if (gameState.timer <= 0) {
+                    clearInterval(gameState.timerInterval);
+                    showFeedback(false, "Time's up! This was a " + 
+                        (gameState.emails[gameState.currentEmail].isPhishing ? "phishing" : "legitimate") + " email.");
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(gameState.timerInterval);
+            gameState.timer = 15;
+            timerElement.textContent = gameState.timer;
+        }
+
+        // Check Answer
+        function checkAnswer(userGuess) {
+            if (!gameState.gameActive) return;
+            
+            clearInterval(gameState.timerInterval);
+            const currentEmail = gameState.emails[gameState.currentEmail];
+            const isCorrect = (userGuess === 'phishing' && currentEmail.isPhishing) || 
+                             (userGuess === 'legitimate' && !currentEmail.isPhishing);
+            
+            if (isCorrect) {
+                gameState.score += 10;
+                updateScore();
+                showFeedback(true, currentEmail.explanation);
+            } else {
+                showFeedback(false, currentEmail.explanation);
+            }
+        }
+
+        // Show Feedback
+        function showFeedback(isCorrect, explanation) {
+            if (isCorrect) {
+                feedbackTitle.textContent = "Correct!";
+                feedbackTitle.className = "feedback-correct";
+            } else {
+                feedbackTitle.textContent = "Incorrect";
+                feedbackTitle.className = "feedback-incorrect";
+            }
+            
+            feedbackMessage.textContent = explanation;
+            feedbackPopup.style.display = "block";
+            overlay.style.display = "block";
+        }
+
+        // Show Game Complete
+        function showGameComplete() {
+            feedbackTitle.textContent = "Game Complete!";
+            feedbackTitle.className = "";
+            feedbackMessage.textContent = `Congratulations! You've completed all ${gameState.emails.length} challenges. Your final score: ${gameState.score}/${gameState.emails.length * 10}`;
+            nextEmailBtn.textContent = "Play Again";
+            feedbackPopup.style.display = "block";
+            overlay.style.display = "block";
+        }
+
+        // Reset Game
+        function resetGame() {
+            gameState.score = 0;
+            gameState.currentEmail = 0;
+            updateScore();
+        }
+
+        // PWA Installation
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installPwaBtn.style.display = 'inline-block';
+        });
+
+        installPwaBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installPwaBtn.style.display = 'none';
+                }
+                deferredPrompt = null;
+            }
+        });
+
+        // Event Listeners
+        startGameBtn.addEventListener('click', startGame);
+        
+        legitimateBtn.addEventListener('click', () => checkAnswer('legitimate'));
+        phishingBtn.addEventListener('click', () => checkAnswer('phishing'));
+        
+        nextEmailBtn.addEventListener('click', () => {
+            feedbackPopup.style.display = "none";
+            overlay.style.display = "none";
+            
+            if (gameState.currentEmail >= gameState.emails.length - 1) {
+                // If game was completed and "Play Again" was clicked
+                resetGame();
+                loadEmail(0);
+                nextEmailBtn.textContent = "Next Challenge";
+            } else {
+                loadEmail(gameState.currentEmail + 1);
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Initialize the game when page loads
+        window.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+</html>
